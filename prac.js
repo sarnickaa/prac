@@ -460,13 +460,14 @@ const index = (arr, val) => {
   if(arr.indexOf(val) === -1) {
     // check to see if smaller
     if(val < arr[0]) {
-      return 0
-    } else if (val > arr[arr.length - 1]) {
-      return arr.length
-    } else
+      return 0 // would be at first index position
+    } else if (val > arr[arr.length - 1]) { // if val is greater than last element in the array
+      return arr.length // would be in the lst indexical position
+    } else //iterate over the array values
       for (i=0; i<arr.length; i++) {
+        // if val is 1 more than the previous index AND 1 less than the next index
       if(val === (1 + arr[i - 1]) && (1 - arr[i + 1])) {
-        indexPosition = i
+        indexPosition = i // i is its indexical position
       }
     }
     return indexPosition
@@ -555,9 +556,13 @@ const factorial = num => {
   return num
 }
 
+// find most common element in array
 const mostCommon = arr => {
   let results = {}
-  let resArr = []
+  let resValues = []
+  let higestOccurance = 0
+  let resultsArr = []
+
 
   for (i=0; i<arr.length; i++) {
     if (!results[arr[i]])
@@ -566,15 +571,23 @@ const mostCommon = arr => {
   }
 
   for(key in results) {
-    resArr.push(results[key])
+  resValues.push(results[key])
   }
 
-  resArr.sort((a, b) => a - b)
-  return resArr.pop()
+  // find highest value
+  resValues.sort((a, b) => a - b)
+  highestOccurance = resValues.pop()
+
+  for (key in results) {
+    if (results[key] === highestOccurance) {
+      resultsArr.push(key)
+    }
+  }
+  return resultsArr
 }
 
 //rotate array k number of steps
-// pop() and shift() k number of times
+// pop() and unshift() k number of times
 const rotateSteps = (arr, k) => {
   for(i=1; i<=k; i++) {
     let elem = arr.pop()
@@ -637,3 +650,521 @@ const factorialZeros = (n) => {
 //      }
 //     return results
 // }
+
+function sockMerchant(n, ar) {
+//iterate over array - group duplicates together - maybe object/keys?
+//iterate over object - for each unique key - if obj[key] % 2 === 0...increment a counter to indicate a pair
+// return a counter
+    let colors = {}
+    let counter = 0
+
+    for(let i=0; i < ar.length; i++) {
+        if(!colors[ar[i]])
+        colors[ar[i]] = 0
+        colors[ar[i]] += 1
+    }
+    // console.log(colors)
+
+    for(let key in colors) {
+    let num = colors[key] / 2
+
+    if (num => 1) {
+        let wNum = Math.floor(num)
+        counter += wNum
+        }
+    }
+
+    return counter
+}
+
+function countingValleys(n, s) {
+// SPLIT STRING into array of characters to iterate over
+// set sea level at 0
+// for each character - if character = D seaLevel -1, if U, seaLevel +1
+// if sealevel = 0 and character iterated over = U = found a valley - increment valley counter
+
+let valleys = 0
+let seaLevel = 0
+
+let trip = s.split("")
+
+for (let i = 0; i < trip.length; i++) {
+    if (trip[i] === 'U') {
+        seaLevel += 1
+    } else {
+        seaLevel -= 1
+    }
+    if (trip[i] === 'U' && seaLevel === 0)
+    // valley found i.e. back to sea level after an up-step
+        valleys += 1
+}
+return valleys
+}
+
+function jumpingOnClouds(c) {
+// jumpArray = push indexesOf each '0' element = valid jumps
+// jumps needed = jumpArray.length - 1
+// iterate over jump array - start at index 0. if jumpArr[i] + jumpArr[i + 2] <= jumpArr[i] + 2 then -1 from jumps needed i.e. can skip over that jump
+
+    let jumpArr = []
+    let jumpCount = 0
+
+    for (let i = 0; i < c.length; i++) {
+        if( c[i] !== 1) {
+        jumpArr.push(i)
+        }
+    }
+
+    for (let i = 0; i < jumpArr.length; i++) {
+        jumpCount = jumpArr.length - 1
+
+        if (jumpArr[i] + jumpArr[i + 2] <= jumpArr[i] + 2) {
+            jumpCount -= 1
+        }
+        return jumpCount
+    }
+}
+
+class Cart {
+  constructor() {
+  this.contents = []
+  }
+
+  add(item) {
+    return this.contents.push(item)
+  }
+
+  remove(item) {
+    return this.contents.splice(this.contents.indexOf(item), 1)
+  }
+
+  print() {
+    return console.log(this.contents)
+  }
+}
+
+class Cart {
+  constructor(dataBase) {
+  this.contents = dataBase,
+  }
+
+  add(item) {
+    return this.contents.push(item)
+  }
+
+  remove(item) {
+    return this.contents.splice(this.contents.indexOf(item), 1)
+  }
+
+  print() {
+    return console.log(this.contents)
+  }
+}
+
+// JS CALCULATOR
+class Calculator {
+  constructor() {
+    this.equals = 0
+  }
+
+  clear() {
+    return this.equals = 0
+  }
+
+  add(num1, num2) {
+    let result = num1 + num2
+    this.equals = result
+    return this.equals
+  }
+
+  subtract(num1, num2) {
+    let result = num1 - num2
+    this.equals = result
+    return this.equals
+  }
+
+  multiply(num1, num2) {
+    let result = num1 * num2
+    this.equals = result
+    return this.equals
+  }
+
+  divide(num1, num2) {
+    let result = num1 / num2
+    this.equals = result
+    return this.equals
+
+  }
+}
+
+// JS CALCULATOR - using object chaining by returning 'this'
+class Calculator {
+  constructor() {
+    this.equals = 0
+  }
+
+  clear() {
+    this.equals = 0
+    return this
+  }
+
+  add(num1) {
+    this.equals += num1
+    return this
+  }
+
+  subtract(num1) {
+    this.equals -= num1
+    return this
+  }
+
+  multiply(num1) {
+    this.equals *= num1
+    return this
+  }
+
+  divide(num1) {
+    his.equals /= num1
+    return this
+
+  }
+}
+
+//BUY-SELL STOCKS problem
+// Suppose we could access yesterday’s stock prices via an array called stockPricesYesterday, where:
+// The indices are the time in minutes past trade opening time.
+// The values are the price in dollars of Apple stock at that time.
+// So if the stock cost $500 60 minutes after the market opened, stockPricesYesterday[60] = 500;
+// Write an efficient function that takes stockPricesYesterday and returns the best profit I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday.
+
+const bestProfit = (arr) => {
+  //best profit = highest sale price - lowest buy price
+  //buy can't be last index
+  //sale date can't be before buy date
+
+  // iterate over the array`
+  // for each element - keep a running record of the index for the min value = currMin
+
+  let minIndex = 0
+  let maxIndex = 1
+  let currMin = 0 // find the index of the minimum price/value
+  let maxProfit = 0
+
+  for(let i=0; i < arr.length; i++) {
+    if(arr[i] < arr[currMin]) {
+      currMin = i // if the currently iterated element is less than the previously set currMin - change the index of currMin to i
+    }
+
+    if(arr[maxIndex] - arr[minIndex] < arr[i] - arr[currMin]) {
+      maxIndex = i
+      minIndex = currMin
+    }
+  }
+
+  maxProfit = arr[maxIndex] - arr[minIndex]
+
+  return maxProfit
+
+}
+
+
+const bestProfit = (arr) => {
+  //best profit = highest sale price - lowest buy price
+  //buy can't be last index
+  //sale date can't be before buy date
+
+  // find the lowest price to buy at:
+  // create a new arary, excluding last element, sort it lowest to highest
+  let buyPrice = arr.slice(0, -1).sort((a, b) => a - b)[0]
+
+  // find the index of the lowest price in the original array
+  let buyIndex = arr.indexOf(buyPrice)
+
+  // find the highest sale price after the index of the buy price:
+  // create a new array, copy a subsection of it at index AFTER buyPrice, sort that section highest to lowest - get highest (index 0)
+  let salePrice = arr.slice(buyIndex + 1).sort((a, b) => b - a)[0]
+
+  return salePrice - buyPrice
+
+}
+
+let uniqueInOrder = function(iterable) {
+  results = []
+
+  if (typeof iterable === "string") {
+    array = iterable.split("")
+
+    for (i = 0; i < array.length; i++) {
+      if (array[i] !== array[i + 1])
+        results.push(array[i])
+    }
+  } else {
+    array = iterable
+
+    for (j = 0; j < array.length; j++) {
+      if (array[j] !== array[j + 1])
+        results.push(array[j])
+    }
+  }
+  return results
+}
+
+const merge = (arr1, arr2) => {
+  return arr1.concat(arr2).sort((a, b) => a - b)
+}
+
+const merge = (arr1, arr2) => {
+  return [...arr1, ...arr2].sort((a, b) => a - b)
+}
+
+//climbing stairs: You are climbing a stair case. It takes n steps to reach to the top.
+// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+// Note: Given n will be a positive integer.
+const climbStairs = n => {
+  let prev = 1
+  let curr = 1
+
+  for(let i = 1; i < n; i++) {
+    prev = curr
+    curr = prev + curr
+  }
+
+  return curr
+}
+
+const lengthOfLastWord = s => {
+  let arr = s.split(/\b/)
+  results = []
+
+  for(i = 0; i < arr.length; i++) {
+    if(arr[i].match(/[A-Za-z]/)) {
+      results.push(arr[i])
+    }
+  }
+
+  if(results.length === 0) {
+    return 0
+  } else
+    let final = results.pop()
+    return final.length
+}
+
+const romanToInt = s => {
+  let roman = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
+  let values = [1, 5, 10, 50, 100, 500, 1000]
+
+
+  let arr = s.split("")
+  // console.log(arr)
+  let nums = []
+
+  for(i=0; i < arr.length; i++) {
+    // console.log(arr[i])
+    if(arr[i] === 'I' && (arr[i+1] === 'V' || arr[i+1] === 'X')) {
+      nums.push(-1)
+    } else if(arr[i] === 'X' && (arr[i+1] === 'L' || arr[i+1] === 'C')) {
+      nums.push(-10)
+    } else if(arr[i] === 'C' && (arr[i+1] === 'D' || arr[i+1] === 'M')) {
+      nums.push(-100)
+    } else {
+      let elem = values[roman.indexOf(arr[i])]
+      // console.log(elem)
+      nums.push(elem)
+    }
+  }
+  // console.log(nums)
+  return nums.reduce((acc, curr) => acc + curr)
+}
+
+// FIND NUMBER OF UNIQUE PAIRS GIVEN A SET ( n NUMBER OF ELEMENTS)
+n(n-1)/2
+
+// NUMBER TO ROMAN
+
+const numToRoman = num => {
+
+  let result = ''
+  let decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  let roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"]
+
+for(i=0; i<=decimal.length; i++) { // for each number in the decimal array
+  while (num % decimal[i] < num) { // keep trying the same number until it won't fit - while num % each index in array is less than num i.e IF it is divisible (i.e. if not divisible will just return num) - then move on to next index
+    result += roman[i] // add the roman equivalent to results string
+    num -= decimal[i] // minus that decimal number from num - on next iteration num will be less
+  }
+}
+return result
+}
+
+const romanNum = str => {
+  let decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  let roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"]
+
+  let result = 0
+
+  for(i=0; i <= decimal.length; i++) {
+    while(str.indexOf(roman[i]) === 0) {
+      result += decimal[i]
+      str = str.replace(str[0], "")
+    }
+  }
+  return result
+}
+
+// RECURSIVE FIBONACCI
+
+// COMPARE STRINGS METHOD
+// == compares the VALUES of strings (assuming type coersion is not a issue)
+
+//Find a Fixed Point (Value equal to index) in a given array
+// Fixed Point in an array is an index i such that arr[i] is equal to i
+const fixedPoint = (arr) => {
+
+  for(i=0; i < arr.length; i++) {
+    if(i === arr[i]) {
+      return i
+    }
+  }
+  return -1
+}
+
+const validParens = s => {
+  // let valid = ['{}', '()', '[]']
+
+    while(s.length !== 0 && (s.includes('()') || s.includes('[]') || s.includes('{}'))) {
+      s = s.replace('()', '')
+      s = s.replace('{}', '')
+      s = s.replace('[]', '')
+    }
+
+    if(s.length === 0) {
+      return true
+    }
+    return false
+  }
+
+  const plusOne = digits => {
+
+    for (i=digits.length -1; i >=0; i--) {
+      if(digits[i] < 9) {
+        digits[i] = digits[i] + 1
+        return digits
+      } else {
+        digits[i] = 0
+      }
+    }
+    if (digits[0] === 0) {
+      digits.unshift(1)
+    }
+    return digits
+  }
+
+  const houseRobber = arr => {
+    // can only rob non-adjacent houses i.e. odd indexes or even indexes
+
+    let oddArr = []
+    let evenArr = []
+
+    for(i=0; i < arr.length; i++) {
+      if(i % 2 === 0) {
+        evenArr.push(arr[i])
+      } else {
+        oddArr.push(arr[i])
+      }
+    }
+
+    let oddTotal = oddArr.reduce((acc, curr) => acc + curr)
+    let evenTotal = evenArr.reduce((acc, curr) => acc + curr)
+
+    if(oddTotal > evenTotal) {
+      return oddTotal
+    } else {
+      return evenTotal
+    }
+  }
+
+  const isAnagram = (s, t) => {
+    // each string has same letters
+    // sort each string alphabetically
+    // if same length - check each index against the other
+
+    if(s.length !== t.length) {
+      return false
+    }
+
+    let sArr = s.split("").sort()
+    let tArr = t.split("").sort()
+
+    for(i=0; i < sArr.length; i++) {
+      if(sArr[i] !== tArr[i]) {
+        return false
+      }
+    }
+    return true
+  }
+
+  const findDifferent = (s, p) => {
+
+    let sArr = s.split("").sort() // sort to compare positions
+    let tArr = t.split("").sort()
+
+    for(i=0; i < tArr.length; i++) { // iterate over longer string with possible inclusion
+      if(tArr[i] !== sArr[i]) {
+        return tArr[i]
+      }
+    }
+  }
+
+  const ransomNote = (note, magazine) => {
+
+    let noteArr = note.split("")
+    let magazineArr = magazine.split("")
+
+    for(i=0; i < noteArr.length; i++) {
+      if(magazineArr.indexOf(noteArr[i]) === -1) {
+        return false
+      } else {
+        magazineArr.splice(magazineArr.indexOf(noteArr[i]), 1)
+      }
+    }
+    return true
+  }
+
+  //LONGEST PALINDROME:
+  // letters must be multiples of 2 - if divisible by 2 - increment counter by number
+  // if not divisible by 2
+      // if number is 1 - push to 1's array
+      // if number is > 1 AND not divisible by 2...increment counter by number - 1
+      // if 1's array.length > 0 add 1 to counter as the single permissable singleton
+  // can only have 1 singular letters
+  const longestPalindrome = s => {
+    let counts = {}
+    let counter = 0
+    let onesArr = []
+
+    let sArr = s.split("")
+
+    for(i=0; i < sArr.length; i++) {
+      if(!counts[sArr[i]])
+      counts[sArr[i]] = 0
+      counts[sArr[i]] += 1
+    }
+
+    for(key in counts) {
+      if(Object.keys(counts) === 1) {
+        counter += counts[key]
+      } else if (counts[key] % 2 === 0) {
+        counter += counts[key]
+      } else if (counts[key] === 1) {
+        onesArr.push(key)
+      } else {
+        counter += (counts[key] - 1)
+      }
+    }
+
+    if (onesArr.length >= 1) {
+      counter += 1
+    }
+
+    return counter
+  }
