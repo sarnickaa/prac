@@ -1168,3 +1168,37 @@ const validParens = s => {
 
     return counter
   }
+
+  const firstNr = s => {
+    // iterate over string - push each character to object as key (unique)
+    // value for each key would increment at each iteration
+    // iterate over occurances object - find value of 1
+    // letter = key
+    // find indexOf of that letter in string
+
+    let occurances = {}
+    let result = []
+
+    for(let i=0; i<s.length; i++) {
+      if(!occurances[s.[i]])
+      occurances[s[i]] = 0
+      occurances[s[i]] += 1
+    }
+
+    for(key in occurances) {
+      if(occurances[key] === 1) {
+        result.push(key)
+      }
+    }
+
+    if(result.length === 0) {
+      return -1
+    } else {
+      for(i=0; i < result.length; i++) {
+        result[i] = s.indexOf(result[i])
+      }
+    }
+
+    result = result.sort((a, b) => a - b)
+    return result[0]
+  }
