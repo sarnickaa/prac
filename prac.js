@@ -1202,3 +1202,191 @@ const validParens = s => {
     result = result.sort((a, b) => a - b)
     return result[0]
   }
+
+  const validPalindromeII = s => {
+    // find non-repeating letters i.e. letters with an incidence of 1 only
+        // remove non repeats 1 by 1 and each time check to see if s === s(reversed)
+
+        let uniques = {}
+        let uniquesArr = []
+        let modified = ''
+        let modifiedRev = ''
+
+        for(i=0; i < s.length; i++) {
+          if(!uniques[s[i]])
+          uniques[s[i]] = 0
+          uniques[s[i]] += 1
+        }
+
+        for(key in uniques) {
+          if(uniques[key] === 1) {
+            uniquesArr.push(key)
+          }
+        }
+
+        // if there are non-repeating letters:
+        if(uniquesArr.length > 0) {
+
+        for(i=0; i < uniquesArr.length; i++) {
+            let sArr = s.split("")
+            sArr.splice(s.indexOf(uniquesArr[i]), 1)
+            modified = sArr.join("")
+            console.log(modified)
+          modifiedRev = modified.split("").reverse().join("")
+            console.log(modifiedRev)
+
+          if(modified === modifiedRev) {
+            return true
+          }
+        }
+        } else {
+        // test if string is palindrome by removing middle character
+            //if even length: remove s.length / 2
+            //if odd length: remove Math.floor(s.length / 2)
+
+            if(s.length % 2 === 0) {
+               let sArr = s.split('')
+               console.log(sArr)
+               sArr.splice(s.length / 2, 1)
+                modified = sArr.join("")
+                console.log(modified)
+            } else {
+                let sArr = s.split('')
+                sArr.splice(Math.floor(s.length / 2), 1)
+                modified = sArr.join("")
+            }
+
+            modifiedRev = modified.split("").reverse().join("")
+
+            if(modified === modifiedRev) {
+                return true
+            }
+        }
+
+        return false
+  }
+
+  // for each index in string - remove that index, check if string is palindrome. - return true if so
+  // return false by default.
+
+  const validPal = s => {
+
+    // let sArr = s.split("")
+    let sModRev = ''
+    let newS = ''
+
+
+    for(let i = 0; i < s.length; i++) {
+      newS = s.replace(s.charAt(i), "")
+      // sMod = sArr.join("")
+      sModRev = newS.split("").reverse().join("")
+
+      if(newS === sModRev) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  // push element after each element in ARRAY
+
+  const push = (arr, elem) => {
+    let i = 1
+    while(i <= arr.length) {
+      arr.splice(i, 0, elem)
+      i += 2
+    }
+    return arr
+  }
+
+// Write a function that takes in a string and returns an array of arrays with all the indices for matching brackets
+// Eg findMatchingBrackets("[a,b,c,[d,e]]") should return [[0, 12], [7,11]]
+//
+// Part 2 if time/for bonus, Make a function that now checks for curlies and parens as well and returns an object.
+//
+// findAllMatches("{fruit: ['bananas', 'apples'], vegetables: ['zucchini']}") would return
+// '{
+// "curleys": [0, 55],
+// "brackets": [[9, 28], [43, 54]],
+// "parens": []
+// }'
+
+
+const matchingParens = s => {
+
+let openers = []
+let closers = []
+let results = []
+
+s = s.split("")
+
+for(i=0; i < s.length; i++) {
+  if(s[i] === '[') {
+    openers.push(i)
+  } else if(s[i] === ']') {
+    closers.push(i)
+  }
+}
+console.log(openers)
+console.log(closers)
+
+closers = closers.reverse()
+
+for(i=0; i < openers.length; i++) {
+let elem = new Array(openers[i], closers[i])
+results.push(elem)
+}
+return results
+}
+
+const matchingParensBonus = s => {
+  let openers = []
+  let closers = []
+  let curlyOpen = []
+  let curlyClose = []
+  let parensOpen = []
+  let parensClose = []
+
+  let results = {
+    curly: [],
+    brackets: [],
+    parens: []
+  }
+
+  for(i=0; i < s.length; i++) {
+    if(s[i] === '{') {
+      curlyOpen.push(i)
+    } else if (s[i] === '}') {
+      curlyClose.push(i)
+    } else if (s[i] === '[') {
+      openers.push(i)
+    } else if (s[i] === ']') {
+      closers.push(i)
+    } else if (s[i] === '(') {
+      parensOpen.push(i)
+    } else if (s[i] === ')') {
+      parensClose.push(i)
+    }
+  }
+
+  curlyClose = curlyClose.reverse()
+
+  for(i=0; i < curlyClose.length; i++) {
+    let elem = [curlyOpen[i], curlyClose[i]]
+    results.curly.push(elem)
+  }
+
+  for(i=0; i < openers.length; i++) {
+    let elem = [openers[i], closers[i]]
+    results.brackets.push(elem)
+  }
+
+  for(i=0; i < parensOpen.length; i++) {
+    let elem = [parensOpen[i], parensClose[i]]
+    results.parens.push(elem)
+  }
+
+  return results
+
+}
