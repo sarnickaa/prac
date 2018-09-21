@@ -303,3 +303,16 @@ Stringified version of an object = '[object Object]' - thus b and c are essentia
 a = {
 '[object Object]': 456
 }
+
+#### what is OOP? Functional programming?
+OOP:  a programming paradigm(a style of structuringa nd building computer programs) that focuses on the data we want to manipulate visualized as objects (as representations of entities like people, buttons, buldings etc.) rather than on the actions or logic of the program.
+
+Once an object is identified - its generalized into a class and any actions it needs to perform/communicate with other obects are defined as methods.
+
+subclasses are defined through inheritance and extension.
+
+OBJECT ORIENTATED DESIGN - the practise of planning a system based around interacting objects.
+
+FUNCTIONAL PROGRAMMING: a programming paradigm based on building a series of pure functions (same input will always give same output) that have no side effects - i.e. a side effect is when any external state is altered or any observable change OUTSIDE of the functions return value.
+
+(shared state = any variable or object that exists in a shared scope - accessible by multiple entities)

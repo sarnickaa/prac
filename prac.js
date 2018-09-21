@@ -501,7 +501,7 @@ const isSquare = n => Math.sqrt(n) === 2
 //is number isSquare
 const isSquare = n => n > 0 && Math.sqrt(n) % 1 === 0
 
-//is number prime - number is prime if it is not divisible by any prime less than or equal to it's square prototype
+//is number prime - number is prime if it is not divisible by any number less than or equal to it's square root
 const isPrime = n => {
   if (n < 2) return false
 
@@ -1386,7 +1386,237 @@ const matchingParensBonus = s => {
     let elem = [parensOpen[i], parensClose[i]]
     results.parens.push(elem)
   }
-
   return results
+}
 
+
+// count keys in object:
+const isIsomprph = (s, t) => {
+  let map = {}
+
+  for(let i = 0; i < s.length; i++) {
+    if(!map[s[i]]) {
+    map[s[i]] = t[i]
+    // create an object that maps the letter of s against the letters of t
+    // iterate over s - set each letter as a unique key on the object if it doesn't already exist
+    // set its value as the corresponding index of t
+
+  } else if (map[s[i]] !== t[i]) {
+    // if the index iterated over already exists on the map AND its value IS NOT the corresponding index on t
+    // strings are NOT isomorphs as they differ at that index
+    return false
+    }
+  }
+  return true
+}
+
+const moveZeros = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    if(arr[i] === 0) {
+      arr.splice(i, 1)
+      arr.push(0)
+    }
+  }
+  return arr
+
+}
+
+// 2 numbers - num1, num2 // divide num1 / num2 // return remainder
+// Math.floor of float result
+// remainder = result = Math.floor(float result)
+
+// const singleNum = num => {
+//   let result = num
+//
+//   if(num.split("").length === 1) {
+//     return result
+//   } else {
+//     return num.split("").reduce((acc, curr) acc + curr)
+//   }
+//   }
+
+const snailSort = sen => {
+  let result = [];
+
+  while (sen.length>0){
+
+    //grab the first row
+    result = result.concat.apply(result, sen.splice(0,1))
+    // apply takes an array of values and treats them as single arguments - thus unravels one layer of the array
+
+    //grab the last column
+    for (var i=0;i<=sen.length-1;i++) // exclude the last row
+    {
+      result = result.concat(sen[i].splice(sen.length));
+      // sen length now is 2 ([[4,5,6], [7,8,9]])
+      // just one value not an array of values - thus don't need apply
+      // splices out 6
+    }
+
+    //grab the last row
+    let temp = [].concat.apply([], sen.splice(sen.length - 1)).reverse()
+    // set up a temp array - concat the values of the last row into it - reverse the temp array
+    result = result.concat.apply(result, temp);
+    // concat the reversed temp array to the results array
+
+    //grab the first column
+    for (var i=sen.length-1;i>=0;i--) // start at the second to last and move up the column
+    {
+      result = result.concat(sen[i].splice(0,1)); // splice out the first element of the cloumn
+    }
+  }
+  return result;
+}
+input = [[1,2,3],[4,5,6],[7,8,9]]
+input2 = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+
+// Pokemon Question:
+// Ajax requests:
+// we have a database with these pokemon:
+// [bulbasaur, ivysaur, venosaur, pikachu, raichu, ditto]
+//
+// each pokemon is an object like
+// ```js
+// {
+//   name: 'bulbasaur',
+//   isBaby: true,
+//   evolvesTo: 'ivysaur',
+//   evolvesFrom: null
+// }
+// ```
+//
+// write me a function that takes in a string which is the name of the pokemon
+// This function should return a string which is the final form of the pokemon
+//
+// endpoint: pokemon.com/pokemon/
+// This will return an array of all the pokemon objects
+
+const pokemon = s => {
+
+  let pokeArr = $.ajax({
+    url: 'http://www.pokemon.com' + '/pokemon/'
+    method: 'GET'
+    headers: {
+      Authorization: 'Token token=' + tokenID
+    }
+  })
+}
+
+let currentPoke = ''
+
+// pokeArr is now array of poke objects
+// iterate over length of array
+for(i=0; i < pokeArr.length; i++) {
+  if(s === pokeArr[i].name) {
+    if(pokeArr[i].evolvesTo === '') {
+      currentPoke = pokeArr[i].name
+      return currentPoke
+    } else {
+      currentPoke = pokeArr[i].evolvesTo
+    }
+  }
+}
+ pokemon(currentPoke)
+}
+
+//
+// PART 2:
+// The author of the api/db decided to add IDs to each pokemon because there are some Pokemon with the same name:
+// ```js
+// {
+//   name: 'bulbasaur',
+//   id: 1
+//   isBaby: true,
+//   evolvesTo: 'ivysaur',
+//   evolvesFrom: null
+// }
+// ```
+//
+// Endpoint: pokemon.com/pokemon/{ID}
+// returns a JSON object for that pokemon
+//
+// Write a new function that takes an integer which is the Pokemon’s ID number.
+
+
+const comparison = (aArr, bArr) =>{
+  let aliceCount = 0
+  let bobCount = 0
+
+  for (i=0; i < aArr.length; i++) {
+    if(aArr[i] > bArr[i]) {
+      aliceCount += 1
+    } else if (aArr[i] < bArr[i]) {
+      bobCount += 1
+    } else if (aArr[i] === bArr[i]) {
+      bobCount += 0
+      aliceCount += 0
+    }
+  }
+  return [aliceCount, bobCount]
+}
+
+//LONGEST PALINDROME IN STRING:
+
+// define a function to test if string is palindrome
+function is_Palindrome(s) {
+  let rev = s.split("").reverse().join("");
+  return s == rev;
+}
+
+function longest_palindrome(s) {
+
+  let max_length = 0
+  let maxPalindrome = ''
+
+  for (let i = 0; i < s.length; i++) {
+
+    let subString = s.substr(i, s.length) //returns string between specified indexes - last NOT included
+
+    // iterate over the substring in reverse i.e starting from last index
+    for (let j = subString.length; j >= 0; j--) {
+      let sub_subString = subString.substr(0, j)
+
+      if (sub_subString.length <= 1)
+        continue // keyword terminates this iteration and continues on to the next one
+
+      if (is_Palindrome(sub_subString)) {
+        if (sub_subString.length > max_length) {
+          max_length = sub_subString.length;
+          maxp = sub_subString;
+        }
+      }
+    }
+  }
+
+  return maxPalindrome;
+}
+
+const longestPal = s => {
+  let resultPal = ''
+
+  for (let i = 0; i < s.length; i++) {
+    let currentLetter = s[i] // palindrome must have same letters on each end
+
+    // find the  index of the next occurance of that letter:
+    let nextOccurance = 0
+
+    for(let j = i+1; j < s.length; j++) {
+      // loop through the string and for each index - test to see if that letter matches current. if so:
+      // test to see if resulting substing is palindrome - if so - set it as resultsPal
+      if( currentLetter === s[j]) {
+        nextOccurance = j // index of next occurance
+
+        // generate the substring between these letters
+        let subString = s.slice(i, nextOccurance + 1) // +1 so it includes the next occurance index
+
+        // check if that substring is a palindrome and LONGER than the currently set resultPal:
+        if(substring.length > resultPal.length &&
+          subString.toLowerCase === subString.split("").reverse().join("").toLowerCase()) {
+            resultPal = sub_subString
+            // SET IT AS THE RESULT - continue with the loop to check all of string
+          }
+      }
+    }
+  }
+  return resultPal
 }
