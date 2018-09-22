@@ -1445,7 +1445,7 @@ const snailSort = sen => {
     // apply takes an array of values and treats them as single arguments - thus unravels one layer of the array
 
     //grab the last column
-    for (var i=0;i<=sen.length-1;i++) // exclude the last row
+    for (let i=0;i<=sen.length-1;i++) // exclude the last row
     {
       result = result.concat(sen[i].splice(sen.length));
       // sen length now is 2 ([[4,5,6], [7,8,9]])
@@ -1593,12 +1593,16 @@ function longest_palindrome(s) {
 
 const longestPal = s => {
   let resultPal = ''
+  let nextOccurance = 0
+  let currentLetter = ''
+  let subString = ''
 
   for (let i = 0; i < s.length; i++) {
-    let currentLetter = s[i] // palindrome must have same letters on each end
+    currentLetter = s[i] // palindrome must have same letters on each end
 
     // find the  index of the next occurance of that letter:
-    let nextOccurance = 0
+    nextOccurance = 0
+    console.log(nextOccurance)
 
     for(let j = i+1; j < s.length; j++) {
       // loop through the string and for each index - test to see if that letter matches current. if so:
@@ -1607,16 +1611,49 @@ const longestPal = s => {
         nextOccurance = j // index of next occurance
 
         // generate the substring between these letters
-        let subString = s.slice(i, nextOccurance + 1) // +1 so it includes the next occurance index
-
+        subString = s.slice(i, nextOccurance + 1) // +1 so it includes the next occurance index
+        console.log(subString)
         // check if that substring is a palindrome and LONGER than the currently set resultPal:
-        if(substring.length > resultPal.length &&
-          subString.toLowerCase === subString.split("").reverse().join("").toLowerCase()) {
-            resultPal = sub_subString
+        if(subString.length > resultPal.length &&
+          subString.toLowerCase() === subString.split("").reverse().join("").toLowerCase()) {
+            resultPal = subString
+            console.log(resultPal)
             // SET IT AS THE RESULT - continue with the loop to check all of string
           }
       }
     }
   }
   return resultPal
+}
+
+// With two arrays of integers, count the numbers of common  integers between the two arrays.
+// set up a container for common - a set (wont allow duplicates)
+// iterate over first array - check to see if element at index exists in array2 - if so, its a common int to both - add it into commons array set
+// return set.size
+
+// this assumes arrays are both same length - if not - iterate over longer array - compare to smaller
+
+const commons = (arr1, arr2) => {
+  let commonInts = new Set()
+
+  for (let i = 0; i < arr1.length; i++) {
+    if(arr2.indexOf(arr1[i]) !== -1) {
+      commonInts.add(arr1[i])
+    }
+  }
+  return commonInts.size
+}
+
+const replace = s => {
+  let newS = ""
+let sArr = s.split("")
+for(i=0; i < sArr.length; i++) {
+  if(sArr[i] === '[' ||
+    sArr[i] === ']' ||
+    sArr[i] === '{' ||
+    sArr[i] === '}') {
+      newS += sArr[i]
+    }
+}
+return newS
 }
