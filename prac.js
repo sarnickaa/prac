@@ -1657,3 +1657,64 @@ for(i=0; i < sArr.length; i++) {
 }
 return newS
 }
+
+// sliding window algorithm
+const maxInWindow = (arr, k) => {
+
+  let maxVal = 0
+
+  for(i=0; i < arr.length; i++) {
+    let val
+
+    if(i === arr.length - 1) {
+      val = arr[i]
+      if (val > maxVal) {
+        return 'no max'
+      }
+    } else {
+    let tempArr = arr.slice(i, i+k)
+    let val = tempArr.reduce((acc, curr) => acc + curr)
+
+    if(val > maxVal) {
+      maxVal = val
+      }
+    }
+  }
+return maxVal
+}
+
+
+const buySellStocks = arr => {
+
+let profit = 0
+
+for(let i=0; i <= arr.length - 2; i++) {
+  for(let j = i + 1; j < arr.length; j++) {
+      let potentialProfit = arr[j] - arr[i]
+      if(potentialProfit > profit) {
+        profit = potentialProfit
+      }
+    }
+  }
+  return profit
+}
+
+const pivotIndex = arr => {
+  let result = 0
+
+if (arr.length < 3) {
+  return -1
+} else {
+
+  for(let i=2; i <= arr.length - 3; i++) {
+    let leftSideTotal = arr.slice(0, i).reduce((acc, curr) => acc + curr)
+    let rightSideTotal = arr.slice(i+1).reduce((acc, curr) => acc + curr)
+
+    console.log(leftSideTotal, rightSideTotal)
+    if(leftSideTotal === rightSideTotal) {
+      result = i
+      }
+    }
+  }
+  return result
+}
