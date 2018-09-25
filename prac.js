@@ -1718,3 +1718,94 @@ if (arr.length < 3) {
   }
   return result
 }
+
+
+const buddyStrings = (a, b) => {
+  // letters must be the same for both STRINGS - but strings can't be exactly equal (!=)
+  // lengths must be the same
+
+
+  // validate for length
+  if(a.length !== b.length) {
+    return false
+  }
+
+//check that strings have the same letters in them
+let setA = new Set(a)
+let setB = new Set(b)
+
+if(setA.size !== setB.size) {
+  return false
+}
+
+let differentIndexes = []
+
+for(let i = 0; i < a.length; i++) {
+  if(a[i] !== b[i]) {
+    differentIndexes.push(i)
+  }
+}
+
+if(differentIndexes.length !== 2) {
+  return false
+}
+
+return (differentIndexes.length === 2 && a[differentIndexes[0]] === b[differentIndexes[1]] && a[differentIndexes[1]] === b[differentIndexes[0]])
+}
+
+
+const shortestPal = str => {
+// start adding last element form array to the front - after each add - check if palindrome
+// define a function to test if string is palindrome
+let nStr = ''
+let sArr = str.split("")
+
+for (let i = 1; i < str.length; i++) {
+  let elem = str[i]
+  sArr.unshift(elem)
+  console.log(sArr)
+  nStr = sArr.join("")
+
+  if(nStr === nStr.split("").reverse().join("")) {
+    return nStr
+    }
+  }
+  return "no palindrome"
+}
+
+// https://primes.utm.edu/howmany.html
+// number of primes less than a specific number = pi(number)
+const primes = num => {
+// enumerate num from 2 - num in an array
+// check if each number is prime (find sqrt of number - test each number from 2 to sqrRoot - if num is divisible by any of those, it is not prime - if not divisible, is prime)
+
+let numArr = []
+let results = []
+
+for (let i=2; i <= num; i++) {
+  numArr.push(i)
+  console.log(numArr)
+}
+
+for(let i=1; i < numArr.length; i++) {
+  let srRoot = Math.floor(Math.sqrt(numArr[i]))
+
+  for(let i = 2; i <= srRoot; i++) {
+    if(numArr[i] % srRoot === 0) {
+      // not prime
+      break
+    }
+    else {
+      //is
+      results.push(numArr[i])
+      console.log(results)
+    }
+  }
+}
+return results.length
+  }
+
+// TAKE the log (base 2) of the number - if it is a whole number - it is a power of 2
+  const powTwo = num => {
+  return (Math.log2(num) % 1 === 0)
+  }

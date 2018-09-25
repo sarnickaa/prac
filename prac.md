@@ -2,12 +2,12 @@
 #### Explain how this works in JavaScript
 'this' refers to the context of a function. i.e. what OWNS the function as it is being executed?
 
-Default Binding: let x = this and function myFunction() {
+Default/implicit Binding: let x = this and function myFunction() {
 return this
 }
 this = the global object
 
-Object Method Binding: when 'this' is defined in a constructor - the object instance will own 'this'
+Object Binding: when 'this' is defined in a constructor - the object instance will own 'this'
 nb. always return 'this' in a method to make it chainable
 
 Explicit Function Binding: .call() .apply() and .bind()
