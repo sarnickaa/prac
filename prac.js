@@ -1776,34 +1776,27 @@ for (let i = 1; i < str.length; i++) {
 // https://primes.utm.edu/howmany.html
 // number of primes less than a specific number = pi(number)
 const primes = num => {
+
+  let results = [2]
 // enumerate num from 2 - num in an array
 // check if each number is prime (find sqrt of number - test each number from 2 to sqrRoot - if num is divisible by any of those, it is not prime - if not divisible, is prime)
-
-let numArr = []
-let results = []
-
-for (let i=2; i <= num; i++) {
-  numArr.push(i)
-  console.log(numArr)
-}
-
-for(let i=1; i < numArr.length; i++) {
-  let srRoot = Math.floor(Math.sqrt(numArr[i]))
-
-  for(let i = 2; i <= srRoot; i++) {
-    if(numArr[i] % srRoot === 0) {
-      // not prime
-      break
-    }
-    else {
-      //is
-      results.push(numArr[i])
-      console.log(results)
+const isPrime = n => {
+  let nRoot = Math.floor(Math.sqrt(n))
+  for(let i = 2; i <= nRoot; i++) {
+    if (n % i === 0) {
+      return false
     }
   }
+  return true
 }
-return results.length
+
+for(let j = 3; j <= num; j++) {
+  if(isPrime(j)) {
+    results.push(j)
   }
+}
+return results
+}
 
 // TAKE the log (base 2) of the number - if it is a whole number - it is a power of 2
   const powTwo = num => {
