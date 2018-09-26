@@ -316,3 +316,6 @@ OBJECT ORIENTATED DESIGN - the practise of planning a system based around intera
 FUNCTIONAL PROGRAMMING: a programming paradigm based on building a series of pure functions (same input will always give same output) that have no side effects - i.e. a side effect is when any external state is altered or any observable change OUTSIDE of the functions return value.
 
 (shared state = any variable or object that exists in a shared scope - accessible by multiple entities)
+
+#### WHAT IS THE EVENT LOOP
+#### EXPLAIN JS PROMISES

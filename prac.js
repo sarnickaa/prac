@@ -1802,3 +1802,107 @@ return results
   const powTwo = num => {
   return (Math.log2(num) % 1 === 0)
   }
+
+image = [
+  [1,1,1],
+  [1,1,0],
+  [1,0,1]
+]
+startColor = image[1][1] = 1
+
+
+const floodFill = (arr, sr, sc, newColor) => {
+
+  let startColor = arr[sr][sc]
+
+
+}
+
+// hourglass - 2D Array
+// n*n array = n-2 * n-2 hourglasses
+// for each element in arr (which is itself an array) hourglass  arr[i] & [i][i+1][i+2]
+//                                                               arr[i+1] & [i+1]
+//                                                               arr[i+2] & [i][i+1][i+2]
+//
+//                                                               Given a  2D Array, :
+//
+//                                                             1 1 1 0 0 0
+//                                                             0 1 0 0 0 0
+//                                                             1 1 1 0 0 0
+//                                                             0 0 0 0 0 0
+//                                                             0 0 0 0 0 0
+//                                                             0 0 0 0 0 0
+//                                                             We define an hourglass in  to be a subset of values with indices falling in this pattern in 's graphical representation:
+//
+//                                                             a b c
+//                                                               d
+//                                                             e f g
+//                                                             There are  hourglasses in , and an hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for every hourglass in , then print the maximum hourglass sum.
+//
+//                                                             For example, given the 2D array:
+//
+//                                                             -9 -9 -9  1 1 1
+//                                                              0 -9  0  4 3 2
+//                                                             -9 -9 -9  1 2 3
+//                                                              0  0  8  6 6 0
+//                                                              0  0  0 -2 0 0
+//                                                              0  0  1  2 4 0
+//                                                             We calculate the following  hourglass values:
+//
+//                                                             -63, -34, -9, 12,
+//                                                             -10, 0, 28, 23,
+//                                                             -27, -11, -2, 10,
+//                                                             9, 17, 25, 18
+//                                                             Our highest hourglass value is  from the hourglass:
+//
+//                                                             0 4 3
+//                                                               1
+//                                                             8 6 6
+//                                                             Note: If you have already solved the Java domain's Java 2D Array challenge, you may wish to skip this challenge.
+//
+//                                                             Function Description
+//
+//                                                             Complete the function hourglassSum in the editor below. It should return an integer, the maximum hourglass sum in the array.
+//
+//                                                             hourglassSum has the following parameter(s):
+//
+//                                                             arr: an array of integers
+
+const hourglass = arr => {
+
+  let results = []
+
+  for (let i=0; i<=arr.length - 3; i++){
+    for(let j=0; j<=arr[i].length - 3; j++) {
+    let hourglassElems = []
+    hourglassElems.push(arr[i][j])
+    hourglassElems.push(arr[i][j + 1])
+    hourglassElems.push(arr[i][j + 2])
+    hourglassElems.push(arr[i + 1][j + 1])
+    hourglassElems.push(arr[i + 2][j])
+    hourglassElems.push(arr[i + 2][j + 1])
+    hourglassElems.push(arr[i + 2][j + 2])
+
+    console.log(hourglassElems)
+
+    let hourglassTotal = hourglassElems.reduce((acc, curr) => acc + curr)
+    results.push(hourglassTotal)
+    }
+  }
+  console.log(results)
+  return Math.max.apply(null, results)
+}
+// tests:
+// [[1, 1, 1, 0, 0, 0],
+// [0, 1, 0, 0, 0, 0],
+// [1, 1, 1, 0, 0, 0],
+// [0, 0, 2, 4, 4, 0],
+// [0, 0, 0, 2, 0, 0],
+// [0, 0, 1, 2, 4, 0]]
+//
+// [[0, -4, -6, 0, -7, -6],
+// [-1, -2, -6, -8, -3, -1],
+// [-8, -4, -2, -8, -8, -6],
+// [-3, -1, -2, -5, -7, -4],
+// [-3, -5, -3, -6, -6, -6],
+// [-3, -6, 0, -8, -6, -7]]
