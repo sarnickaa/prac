@@ -1906,3 +1906,18 @@ const hourglass = arr => {
 // [-3, -1, -2, -5, -7, -4],
 // [-3, -5, -3, -6, -6, -6],
 // [-3, -6, 0, -8, -6, -7]]
+
+const sortArray = arr => {
+
+let results = []
+
+for(i=0; i < arr.length; i++) {
+  if(arr[i] % 2 === 0) {
+  let elem = arr.splice(i, 1)
+  results = results.concat(elem)
+  }
+}
+let final = results.concat(arr)
+return final
+  }
+}
