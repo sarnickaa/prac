@@ -319,3 +319,4 @@ FUNCTIONAL PROGRAMMING: a programming paradigm based on building a series of pur
 
 #### WHAT IS THE EVENT LOOP
 #### EXPLAIN JS PROMISES
+#### explain react lifecycle

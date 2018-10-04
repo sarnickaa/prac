@@ -623,33 +623,33 @@ const factorialZeros = (n) => {
 
 // cont area = r => Math.PI * Math.pow(Math.round(r), 2)
 //
-// // write a function that receives the following input
-// // and returns the expected output
-// //input
-// {
-//   users: [
-//     { id: '1', name: 'David', position: 'Web' }, // id is always present in user objects
-//     { id: '8', name: 'Jenn' },
-//   ]
-// }
-// // output
-// {
-//  1: { id: '1', name: 'David', position: 'Web' },
-//  8: { id: '8', name: 'Jenn' },
-// }
-//
-//
-// const conv = obj => {
-//  // obj[users] iterate over array // each element in the array - match key 'id' - push that key to a empty placeholder object // return placeholder
-//
-//  let results = {}
-//  let array = obj[users]
-//
-//  for(i=0; i<array.length; i++) {
-//         results[arr[i][id]]= arr[i]
-//      }
-//     return results
-// }
+write a function that receives the following input
+and returns the expected output
+input
+{
+  users: [
+    { id: '1', name: 'David', position: 'Web' }, // id is always present in user objects
+    { id: '8', name: 'Jenn' },
+  ]
+}
+// output
+{
+ 1: { id: '1', name: 'David', position: 'Web' },
+ 8: { id: '8', name: 'Jenn' },
+}
+
+
+const conv = obj => {
+ // obj[users] iterate over array // each element in the array - match key 'id' - push that key to a empty placeholder object // return placeholder
+
+ let results = {}
+ let array = obj.users
+
+ for(i=0; i<array.length; i++) {
+        results[array[i].id] = array[i]
+     }
+    return results
+}
 
 function sockMerchant(n, ar) {
 //iterate over array - group duplicates together - maybe object/keys?
