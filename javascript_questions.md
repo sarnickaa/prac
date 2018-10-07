@@ -1,3 +1,15 @@
+#### Explain Event Delegation
+its an event handling pattern - where if you have multiple elements that must have the same event occur - you put the event handler on their common ancestor only instead of on each element
+
+i.e. instead of an onClick handler on each element of a table/list etc. - a catch-all handler is set up on the <ul> or <table> element.
+
+table.onClick = function(event) {
+let target = event.target // wherever the click was
+
+if(target.tagName != 'td') return // if not a datacell ignore, else
+
+highlight(target) // apply highlight
+}
 
 #### Explain how this works in JavaScript
 'this' refers to the context of a function. i.e. what OWNS the function as it is being executed?
@@ -65,6 +77,191 @@ Closures allow variables to be transported to different scopes - because irrespe
 Closures are therefore important for modules that can be reused in various parts of the code (make it easier to create things like libraries)
 
 in React - closures occur when setState() methods are created though ES6 arrow notation i.e. If the function is an => arrow function, 'this' is hard-wired to refer to the value of 'this' at the location where the function was defined i.e. the class itself thus - the setter function can be exported across components to alter state from points deeply nested within the component hierarchy.
+
+#### Can you describe the main difference between a forEach loop and a .map() loop and why you would pick one versus the other?
+.map() transforms each item in the array and returns a new array
+
+.forEach() iterates over each element, performs a function on each of those element, does not automatically return anything.
+
+#### What's a typical use case for anonymous functions?
+as callbacks that only need to be used once and not alled anywhere else in the code.
+used as an IIFE immediatley invoked function expression
+
+#### How do you organize your code? (module pattern, classical inheritance?)
+most of my code projects have followed a module pattern that aims for a separation of concerns.
+
+#### Difference between: function Person(){}, var person = Person(), and var person = new Person()?
+function Person(){} is a function statement - it performs some action that is defined in the block encapsulated by the curly brackets
+
+var person = new Person() instantiates a new Person object and assigns it to the variable person. It invokes the Person constructor function through the keyword new
+
+#### What's the difference between .call and .apply
+both are examples of explicit function binding - in that they allow you to specify an object as the 'context' for the method/function they're attached to. This context will be what 'this' refers to within the body of the function.
+
+the context object is specified as the first argument in both
+
+.call() - subsequent arguemnst to be passed to the function are separated by a comma
+
+.apply() - accepts an array as the second argument for the function. Math.max.apply(null, arr)
+
+#### Explain Function.prototype.bind
+creates a new function - the first argument provided is the context object for the functions 'this' keyword.
+
+#### Explain Ajax in as much detail as possible.
+AJAX = asynchronous javascript and XML - a part of the jquery library that allows JS to make asynch HTTP requests from a front end client. Has built in methods to request/recieve data in a variety of formats (JSON/XML) from a server
+JQUERY =  a JS library that has methods for DOM manipulation/CSS manipulation/HTML manipulation/AJAX - makes it easier to use JS on the front end to create an interactive user event-driven web application.
+
+ADVANTAGES:
+improved user experience
+responsive/intaractive web pages
+HTTP requests
+
+DISADVANTAGES:
+potentially not well suited for mobile
+can be hard to debug
+load times?
+
+#### Explain "hoisting"
+JS defaukt behaviour for moving JS function decalrations to the top. During the creation-phase of the global execution context - a function declaration is placed into memory AS A FUNCTION. Thus during runtime/execution phase - it can be called upon and executed BEFORE its physically encountered in the sourcecode as it already exists in memory. Function expressions are different as during the creation phase variables are assigned default value of undefined. assignment only happens at runtime.
+
+#### Describe event bubbling
+when a nested/child element is interacted with - that event bubbles up to its parent which often holds an event handler (this is how event delegation occurs)
+
+#### What's the difference between an "attribute" and a "property"
+most standard HTML attributes (i.e. class, id, etc.) become 'properties' on the DOM object - however - non-standard attributes can still be accessed as strings through the .get/set/remove/hasAttribute methods
+
+#### Why is extending built-in JavaScript objects not a good idea?
+adding methods to Object and Array classes risks breaking functionality in other areas of the codebase
+
+#### Explain the same-origin policy with regards to JavaScript
+stops code from another site from executing on your site (this is a Cross Site Scripting atack)
+
+to view the sites as the same - the protocol must me the same (http/https), the domain must be the same and teh port must be the same.
+
+CORS middleware in express based apis allow you to specify a client origin for responses for the API to prevent CORS errors
+
+#### Why is it called a Ternary operator, what does the word "Ternary" indicate?
+ternary = 3
+a ternary expression accepts 3 operands
+
+the test condition (to evaluate true or false) ? the 'then' expression if true : the 'else' expression if falsey
+
+essetially it is a shorter way to write an if/else statement
+
+#### Why is it, in general, a good idea to leave the global scope of a website as-is and never touch it?
+in JS all code shares a single global namespace - placing variables in the global namespace can result in unintended collisions deeper within the codebase.
+
+#### SPA
+an SPA is a single page application that doesnt rely on multiple pages being served to change the view/content of the page. Only one HTML page is requested by the client from the server. Views are generated dynamically through JS/jquery as needed and in response to user actions. The page does not refresh at any point in this process.
+
+#### EXPLAIN JS PROMISES
+a promise is a JS object that returns a value at a later point in time i.e it is an object that represents the eventual completion or failure of an asynch action. A promise is an object that can be resolved for either success or failure
+
+It is a returned object that callbacks are attached to. The callbacks are attached to the returned promise through JS promise object has prototype methods i.e. catch() and then() to manage the returned object in accordance with its resolved state.
+
+PROMISES are used extensivley in express routing - when a callback is passed to an express method i.e. get/post/patch....a promise object is returned (resolved for either success or failure) - a promise chain is then started to manage the returned promise (.then, .catch)
+
+Promises centralize error handling and eliminate the potential for callback hell - it is a cleaner more readable way to run asynchronous tasks.
+
+#### What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?
+JSX is a language that compiles to JS - used to create react components
+It is easier and more intuitive to define a react element through JSX
+
+#### What tools and techniques do you use debugging JavaScript code?
+reproduce the error
+invesigate error in dev console, investigate stack trace
+place console.logs/debugger breaks in code to determine what teh issue coould be
+google anything i don't understand/stack overflow/issue queue to invesigate past errors
+
+#### What language constructions do you use for iterating over object properties and array items?
+for loop
+map
+forEach
+for in loop (object)
+
+#### Explain the difference between mutable and immutable objects. What is an example of an immutable object in JavaScript? What are the pros and cons of immutability? How can you achieve immutability in your own code?
+MUTABLE - an object whose state can change over time.
+IMMUTABLE - an object, that after its created - cannot be changed. Strings and Numbers are immutable in JS
+only Objects and Arrays are mutable in JS (reference types vs. primitives)
+
+immutable objects can be safely passed around throughout code without being changed and causing unintended effects. Mutable objects are necessary for responsive actions and flexible data manipulation.
+
+#### Explain the difference between synchronous and asynchronous functions.
+an asynchronous function requires time to execute and allows subsequent code to execute before it is finished. Synchronous execution is top down and sequential. later functions will only be executed if earlier functions have completed.
+
+#### WHAT IS THE EVENT LOOP
+the mechanism by which JS manages asynch events. The event loop takes an asych function out of the JS call stack (a data structure that traces function calls (when invoked function is pushed on to call stack - when retruns, popped off)) and places it in the callback queue. This allows subsequent funnctions on the callstack to execute before the asynch function is finished. once the call stack is clear - the asynch function executes.
+
+#### Explain the differences on the usage of foo between function foo() {} and var foo = function() {}
+
+function foo() {} is a function declaration
+var foo = function () {} is a function expressions
+see notes on hoisting and the creation phase of the global execution context.
+
+#### ES6 class and ES5 constructors?
+class is essentially just syntactical sugar wrapping the constructor function.
+
+#### Can you offer a use case for the new arrow => function syntax? How does this new syntax differ from other functions?
+=> syntax can be used to create function expressions in ES6
+using an arrow function within a class/object - automatically binds the 'this' context to the object i.e. when used within a stateful component react.
+
+#### OBJECT/ARRAY destructuring:
+makes it possible to unpack values from arrays and objects and assign them to distinct variables.
+
+variable names = object keys, values = object values
+const { email, password } = this.state - results in const email and const password with the values contained by those keys in the state object
+
+array destructuring:
+const a, b
+[a, b] = [10, 20]
+ const a = 10
+ const b = 20
+
+ #### ES6 Template Literals offer a lot of flexibility in generating strings, can you give an example?
+ `${JS expression that can be evaluated}`
+
+ #### What are the benefits of using spread syntax and how is it different from rest syntax?
+ spread syntax expands an iterable like an object or an array in a place where a number of argumenrs are expected i.e. in a function call
+
+ const numbers = [1, 2, 3];
+console.log(sum(...numbers));
+// expected output: 6
+
+let objClone = { ...obj }
+var arr = [1, 2, 3];
+var arr2 = [...arr]; // like arr.slice()
+// concatenate Array
+var arr1 = [0, 1, 2];
+var arr2 = [3, 4, 5];
+arr1 = [...arr1, ...arr2]
+
+[...(new Set(skipped))] // expands a set into an array2
+
+REST PARAMATER - the last paramater to a function can be prefixed with ... if it is unknown how mamy arguments will be provided. all subsequent user provided arguments will be placed into an array
+
+function myFun(a, b, ...manyMoreArgs) {
+  console.log("a", a);
+  console.log("b", b);
+  console.log("manyMoreArgs", manyMoreArgs);
+}
+
+myFun("one", "two", "three", "four", "five", "six");
+
+// Console Output:
+// a, one
+// b, two
+// manyMoreArgs, [three, four, five, six]
+
+#### How can you share code between files?
+by using module.exports{} object and require('') statement in ES5
+ aor by using import/from and export statements in ES6
+ <!-- https://medium.com/@thejasonfile/a-simple-intro-to-javascript-imports-and-exports-389dd53c3fac -->
+
+#### What is the difference between == and ===?
+
+== is an equality operator which will compare values AND will do any type conversion necessary to allow this.
+
+=== is a strict equality operator - which will compare value without doing any type conversion. values MUST be of the same type to return true.
 
 #### JS EQUALITY OF OBJECTS/ARRAYS
  Internally JavaScript actually has two different approaches for testing equality. Primitives like strings and numbers are compared by their value, while objects like arrays, dates, and plain objects are compared by their reference.
@@ -317,6 +514,18 @@ FUNCTIONAL PROGRAMMING: a programming paradigm based on building a series of pur
 
 (shared state = any variable or object that exists in a shared scope - accessible by multiple entities)
 
-#### WHAT IS THE EVENT LOOP
-#### EXPLAIN JS PROMISES
 #### explain react lifecycle
+refers to the stages a component goes through as it is created, rendered and destroyed. each stage has methods that notify you and allow you to manipulate these stages.
+
+4 main lifecycle phases:
+INITIALIZATION
+
+MOUNTING - occurs when a component is being inserted into the DOM - has 2 methods (componentWillMount() componentDidMount() - use this when making an asynch call i.e. getWines to ensure there is a component in existance to populate with data feteched from an API)
+
+UPDATING - component updates and re renders when it recieves props - these methods allow you to control how that happens i.e componentWillReceiveProps()
+shouldComponentUpdate()
+componentWillUpdate()
+render()
+componentDidUpdate()
+
+UNMOUNTING - methods that handle the way a component is removed from the DOM

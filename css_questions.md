@@ -11,13 +11,15 @@ To determine level of specificity - consider:
   highest score wins specificity
 
   other rules:
-  if specificity is equal - last rule wins
-  ID selectors have a higher specificity than attribute selectors:
-div#a {background-color: green;} = WINS
-#a {background-color: yellow;}
-div[id=a] {background-color: blue;}
 
-Contextual selectors are more specific than a single element selector - The embedded style sheet is closer to the element to be styled. So in the following situation
+  if specificity is equal - last rule wins
+
+  ID selectors have a higher specificity than attribute selectors:
+    div#a {background-color: green;} = WINS
+    #a {background-color: yellow;}
+    div[id=a] {background-color: blue;}
+
+The embedded style sheet is closer to the element to be styled so it wins. So in the following situation
 
 From external CSS file:
 #content h1 {background-color: red;}
@@ -61,7 +63,7 @@ a BFC is part of the visual rendering of a page in which block boxes are laid ou
   1.clear property set on the element
   2.Parent Container Collapse - if a container has nothing but floated element - it collapses to nothing - use one of these methods AFTER the floated elements but BEFORE the container is closed.
       -empty div method: insert an empty div or a <br> element - potentially semantically redundant
-      -overflow set to auto or hidden on parent will expand it to fit - can trigget unwanted content hiding or scrollbars as was not designed specifically for clearing
+      -overflow set to auto or hidden on parent will expand it to fit - can trigger unwanted content hiding or scrollbars as was not designed specifically for clearing
       -:after pseudo selector to apply a clearfix class on the parent. essentially inserts a tiny hidden bit of content after the patent element which clears the float
 
 ## How would you approach fixing browser-specific styling issues?
@@ -91,7 +93,7 @@ have used flexbox for responsive design
 }
 
 ## Are you familiar with styling SVG?
-Scalable Vector Graphics - familliar with creating them in illustrator - small size that compresses well and scales to any size without losing clarity
+Scalable Vector Graphics - familiar with creating them in illustrator - small size that compresses well and scales to any size without losing clarity
 
 have used it with <img> tags and changed width/height directly in the tag
 
@@ -104,10 +106,56 @@ use the most specific category possible (ID, then class then tag selectors)
 = this minimizes the amount of time the browser spends matching
 
 ## What are the advantages/disadvantages of using CSS preprocessors?
+vanilla css is less flexible and doesn't offer functionality like mixins and functions (SASS), avoids repetition and allows you to modularize across different style-sheets
 
+DISADVANTAGES - debugging is harder due to compilation step i.e. CSS line numbers in the console are meaningless
+compilation can be slow (preprocessors must compile to CSS)
+css preprocessors are easy to add to the tech-stack on a project but harder to remove down the line
 
+## Explain how a browser determines what elements match a CSS selector.
+browser reads the CSS selector RIGHT to LEFT - it traverses up its parent elements to determine a match.
 
+basically the shorter tehs elector chain - the faster a match is found
 
+## Describe pseudo-elements and discuss what they are used for.
+a KEYWORD thats added to a selector that allows you to style a certain 'part' or action associated with the selector
+:first-line, :before, :after, :hover
 
+## Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.
+the box-model calculates how much space an element takes up when rendered to the screen
 
-mm
+margin<border<padding<element>padding>border>margin
+
+## What does * { box-sizing: border-box; } do? What are its advantages?
+changes the width and height of the element to include border and padding i.e. height of the element is now height + vertical padding amount + border if any
+
+## What is the CSS display property and can you give a few examples of its use?
+specifies the display behaviour or type of rendering that an element will recieve:
+none, hidden, block, inline-block, flex
+
+## What's the difference between inline and inline-block?
+inline displays an element as an inline element - does not trigger a new line, does not accept any height/width properties
+size is depenedant on the content of the element (i.e. as opposed to a block element that fills up the width of its parent container)
+
+inline-block - the element itself is formatted as an inline element (i.e. its size is dependant on content) HOWEVER you can apply height and with properties. does not trigger a new line
+
+## What's the difference between a relative, fixed, absolute and statically positioned element?
+static: default position, part of the normal document flow
+
+absolute: position is determined RELATIVE to the nearest positioned ancestor(parent) if none exists - positioned relative to the window. It is thus removed FROM the normal document flow.
+
+fixed: positioned relative to the viewport - removed from the document flow and maintains this position even when scrolled.
+
+relative: positioned relative to itself - removed from normal document flow and leaves a gap on the page where it would otherwise have been.
+
+## The ‘C’ in CSS stands for Cascading. How is priority determined in assigning styles (a few examples)? How can you use this system to your advantage?
+in the cases of equal specificity - the latest rule will be applied (cascaded)
+
+## Have you played around with the new CSS Flexbox or Grid specs?
+FLEXBOX - used for responsive elements without media queries and for easy centering. Bootstrap is based on flexbox principals.
+
+## Can you explain the difference between coding a web site to be responsive versus using a mobile-first strategy?
+responsive design is intended to be flexible across a range of screen sizes and devices. Mobile first design starts with a selected range of devices and designs to maximize user experience there. Progressive engancement is used to add features once the screen size grows.
+
+## Have you ever worked with retina graphics? If so, when and what techniques did you use?
+not really - know that they require higher resolution (= twice the display size)
