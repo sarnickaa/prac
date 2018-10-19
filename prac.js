@@ -1803,21 +1803,6 @@ return results
   return (Math.log2(num) % 1 === 0)
   }
 
-image = [
-  [1,1,1],
-  [1,1,0],
-  [1,0,1]
-]
-startColor = image[1][1] = 1
-
-
-const floodFill = (arr, sr, sc, newColor) => {
-
-  let startColor = arr[sr][sc]
-
-
-}
-
 // hourglass - 2D Array
 // n*n array = n-2 * n-2 hourglasses
 // for each element in arr (which is itself an array) hourglass  arr[i] & [i][i+1][i+2]
