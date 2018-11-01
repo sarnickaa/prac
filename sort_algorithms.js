@@ -1,5 +1,4 @@
 // BUBBLE SORT:
-
 const bubbleSort = arr => {
   for(let i = arr.length - 1; i>=0; i--) {
     // start at the last element of the array - consider the last element first
@@ -48,7 +47,6 @@ const bubbleSort = arr => {
 // Go through the array, find the index of the lowest element swap the lowest element with the first element. Hence first element is the lowest element in the array.
 // Now go through the rest of the array (excluding the first element) and find the index of the lowest and swap it with the second element.
 // thats how it continues to select (find out) the lowest element of the array and putting it on the left until it hits the last element.
-
 const selectionSort = arr => {
   let minIndex = 0
   let temp = 0
@@ -70,5 +68,27 @@ const selectionSort = arr => {
     arr[minindex] = temp
     // put the temp value back in the array to be processed later
   }
+  return arr
+}
+
+const insertionSort = arr => {
+
+  for(let i = 0; i<arr.length; i++) {
+      let tempElem = arr[i]
+      // current element being iterated stores as tempElem
+      let j = i - 1
+      // j = element BEFORE the current interation
+      // the while loop will only kick in at arr[1] - the first element is skipped
+    while(j >= 0 && arr[j] > tempElem) {
+      // this does not kick in until j = 1 (2nd element of array)
+      // if arr[j] is BIGGER than current iteration i.e. if current iteration is smaller than the element before it...
+      // perform a swap
+      arr[j+1] = arr[j]
+      // assign that value to the position AFTER current iteration
+      j--
+      // loop through until j = 0
+    }
+    arr[j+1] = tempElem
+}
   return arr
 }

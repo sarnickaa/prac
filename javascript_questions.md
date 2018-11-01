@@ -416,8 +416,8 @@ next is 1 + 2 which is 3
 
 https://scotch.io/tutorials/javascript-unary-operators-simple-and-useful
 unary operator performs an operation on a single operand(argument)
-+ tries to coerce operand into a number, make sit positive
-- tries to coerce operand into a number, make sit negative
++ tries to coerce operand into a number, makes it positive
+- tries to coerce operand into a number, makes it negative
 ! converts to a boolean, then negates i.e. if(!expression) = if the expression value does NOT exist
 ++ adds one to operand - if postfix i++ - returns value of i before incrementing, if prefix ++i returns value after incrementing
 -- subs one from operand
